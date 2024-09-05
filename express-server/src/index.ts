@@ -4,13 +4,16 @@ import { createClient } from "redis";
 const app = express();
 app.use(express.json());
 
-const client = createClient();
-client.on('error', (err) => console.log('Redis Client Error', err));
+const client = createClient({
+    url: 'redis://localhost:6379'
+});
+client.on('error', (err) => console.log('Redis Client Error', err.stack));
 
 app.post("/submit", async (req, res) => {
     const problemId = req.body.problemId;
     const code = req.body.code;
     const language = req.body.language;
+    const userId=req.body.userId;
 
     try {
         await client.lPush("problems", JSON.stringify({ code, language, problemId }));

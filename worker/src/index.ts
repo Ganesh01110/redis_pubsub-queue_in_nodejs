@@ -1,5 +1,7 @@
 import { createClient } from "redis";
-const client = createClient();
+const client = createClient({
+    url: 'redis://localhost:6379' // Ensure this is the correct Redis URL
+});
 
 async function processSubmission(submission: string) {
     const { problemId, code, language } = JSON.parse(submission);
@@ -12,6 +14,7 @@ async function processSubmission(submission: string) {
     // Simulate processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log(`Finished processing submission for problemId ${problemId}.`);
+    client.publish("problem_done", JSON.stringify({ problemId, status: "TLE" }));
 }
 
 async function startWorker() {
@@ -24,6 +27,7 @@ async function startWorker() {
         while (true) {
             try {
                 const submission = await client.brPop("problems", 0);
+                console.log(submission);
                 // @ts-ignore
                 await processSubmission(submission.element);
             } catch (error) {
