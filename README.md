@@ -1,7 +1,7 @@
 # redis_pubsub-queue_in_nodejs
 it is an implementation of pubsub and queue structure with redis and node js with a simple server and scalable worker model
 
-# Redis-based Code Submission Processor
+-> Redis-based Code Submission Processor
 
 This project is a system designed to handle code submissions through a REST API and process them asynchronously using a Redis-backed queue. It consists of two main components:
 - **Server**: Receives code submissions via an API.
@@ -32,13 +32,13 @@ To run this project, ensure you have the following installed:
 
 ### 1. Clone the Repository
 
-```bash
-git clone https://github.com/your-username/redis-code-submission-processor.git
-cd redis-code-submission-processor
+```
+git clone https://github.com/Ganesh01110/redis_pubsub-queue_in_nodejs.git
+cd redis_pubsub-queue_in_nodejs
 ```
 ### 2. Install Dependencies
 Navigate to the respective directories to install the required dependencies:
-```bash
+```
 # Install server dependencies
 cd server
 npm install
